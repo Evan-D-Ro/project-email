@@ -18,7 +18,7 @@ const app = express();
 const port = process.env.PORT;
 
 //Conecta ao banco de dados MongoDB
-//connectBD();
+connectBD();
 
 //Registrando Middlewares
 app.use(staticMiddleware);
