@@ -1,15 +1,31 @@
 import express from "express";
-//import ClienteController from '../controllers/ClienteController.js';
+import UsuarioController from '../controllers/UsuarioController.js'; // Importando o controller de Usuário
+import SecurityController from "../controllers/SecurityController.js";
+import {
+    createEmailRateLimit,
+    loginRateLimit,
+    verificarAutenticacao
+} from '../middlewares/middlewares.js';
 
 const router = express.Router();
 
-//************ API RESTful - Rotas *****************************************//
+//ROTA DE AUTENTICAÇÃO
+router.post('/api/autenticar', loginRateLimit, SecurityController.autenticar);
 
-//-------------- Cliente ---------------------------------------------------//
+// Rota pública para criar um usuário
+router.post('/api/usuarios', createEmailRateLimit, UsuarioController.createUsuario);
 
-// router.post('/clientes', ClienteController.createCliente);
-// router.get('/clientes', ClienteController.getAllClientes);
-// router.post('/clientes/editar/:id', ClienteController.editarCliente);
-// router.get('/clientes/excluir/:id', ClienteController.excluirCliente);
+
+
+
+router.get('/api/inbox', verificarAutenticacao, (req, res) => {
+    // Se chegou aqui, o token é válido
+    res.status(200).json({ mensagem: 'Autenticado' });
+});
+
+
+// router.get('/usuarios', UsuarioController.getAllUsuarios);
+// router.post('/usuarios/editar/:id', UsuarioController.editarUsuario);
+// router.get('/usuarios/excluir/:id', UsuarioController.excluirUsuario);
 
 export default router;

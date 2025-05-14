@@ -6,10 +6,11 @@ import {
     staticMiddleware,
     urlencodedMiddleware, jsonMiddleware,
     securityMiddleware, compressionMiddlewware,
-    rateLimitMiddleware, morganMiddleware
+    rateLimitMiddleware, morganMiddleware, corsMiddleware
 } from './middlewares/middlewares.js';
 import router from './routes/routes.js';
 import connectBD from './config/db.js';
+import cookieParser from 'cookie-parser';
 
 //Carregar as variáveis de ambiente do arquivo .env
 dotenv.config();
@@ -26,8 +27,10 @@ app.use(urlencodedMiddleware);
 app.use(jsonMiddleware);
 app.use(securityMiddleware);
 app.use(compressionMiddlewware);
-//app.use(rateLimitMiddleware);
+app.use(rateLimitMiddleware);
 app.use(morganMiddleware);
+app.use(cookieParser());
+app.use(corsMiddleware);
 
 //Registrando rotas (endpoints)
 app.use(router);
