@@ -21,7 +21,7 @@ const compressionMiddlewware = compression();
 
 const rateLimitMiddleware = rateLimit({
     windowMs: 10 * 60 * 1000,  // 10 minutos
-    max: 50,                  // Limita cada IP a 50 requisições por janela
+    max: 500,                  // Limita cada IP a 50 requisições por janela
     message: 'Muitas requisições, tente novamente em 10 minutos.'
 });
 

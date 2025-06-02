@@ -14,12 +14,6 @@ const UsuarioSchema = new mongoose.Schema(
             lowercase: true,
             trim: true,
             match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Por favor, insira um e-mail válido'],
-            validate: {
-                validator: function (v) {
-                    return v.endsWith('@vuemail.com');
-                },
-                message: props => `${props.value} não é um e-mail válido. O e-mail deve terminar com @vuemail.com`
-            }
         },
         senha: {
             type: String,
@@ -32,7 +26,8 @@ const UsuarioSchema = new mongoose.Schema(
             required: false,
             lowercase: true,
             trim: true,
-            match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Por favor, insira um e-mail válido']
+            match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Por favor, insira um e-mail válido'],
+            select: false
         },
     },
     {

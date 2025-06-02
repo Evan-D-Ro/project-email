@@ -20,8 +20,18 @@ export default {
   components: { NavBar, FooterBar },
   data() {
     return {
-      isDarkMode: false
+      isDarkMode: localStorage.getItem('darkMode') === 'true'
     }
+  },
+  watch: {
+      isDarkMode(val) {
+          localStorage.setItem('darkMode', val);
+          document.documentElement.classList.toggle('dark', val);
+      }
+  },
+  created() {
+      // aplica o modo escuro no carregamento
+      document.documentElement.classList.toggle('dark', this.isDarkMode);
   },
   computed: {
     mostrarUsuario() {
@@ -38,12 +48,18 @@ export default {
 </script>
 
 <style>
-html,
-body,
-#app {
+html, body {
   height: 100%;
   margin: 0;
+}
+#app {
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+  display: flex; /* Para repassar o flex para a página de login */
   flex-direction: column;
 }
 </style>

@@ -19,8 +19,10 @@ export default {
     return {
       mostrarFormulario: false,
       todosSelecionados: false,
-      textoBusca: "", // <-- aqui
+      textoBusca: "",
+      page: "arquivadas",
       mensagensSelecionadas: []
+
     };
   },
   methods: {
@@ -116,12 +118,12 @@ export default {
   <div
     class="flex flex-1 h-full flex-col lg:flex-row bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 overflow-hidden">
     <SidebarOptions @novo-email="mostrarFormularioEmail" @voltar-caixa="ocultarFormularioEmail"
-      :paginaAtual="'inbox'" />
+      :paginaAtual="'arquivadas'" />
     <div class="flex flex-col flex-1 justify-around">
       <div class="pl-2">
         <div class="pl-4 pr-5">
           <h1 v-if="!mostrarFormulario" class="text-4xl font-bold text-green-600 dark:text-green-400 pt-5 pb-5">
-            Caixa de entrada
+            Arquivados
           </h1>
         </div>
 
@@ -130,6 +132,7 @@ export default {
         </div>
       </div>
       <div class="flex-1 flex flex-col overflow-hidden justify-start">
+
         <div class="pl-4 pr-5">
           <TopbarOptions v-if="!mostrarFormulario" :page="page" @selecionar-todos="selecionarTodos"
             @favoritar="executarAcao('favoritar')" @arquivar="executarAcao('arquivar')"

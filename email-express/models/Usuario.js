@@ -39,7 +39,6 @@ class Usuario {
     static async authenticate(email, senha) {
         const usuario = await UsuarioModel.findOne({ email: email }).select('+senha'); // A senha é excluída por padrão no `select: false`
 
-
         if (!usuario) {
             const error = new Error('Usuário não encontrado');
             error.statusCode = 404;
